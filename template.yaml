@@ -18,7 +18,7 @@ spec:
         - owner
         - system
       properties:
-        app_name:
+        cluster_name:
           title: EKS Cluster Name
           type: string
           default: "eks-sample"
