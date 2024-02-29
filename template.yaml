@@ -1,0 +1,294 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: eks-template
+  title: Create a EKS Cluster
+  description: Provides an EKS Cluster and terraform code to build and deploy one. 
+  tags:
+    - recommended
+    - terraform
+spec:
+  owner: user:default/skitamura7446
+  type: service
+
+  parameters:
+    - title: Provide information about the new component
+      required:
+        - cluster_name
+        - owner
+        - system
+      properties:
+        app_name:
+          title: EKS Cluster Name
+          type: string
+          default: "eks-sample"
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind:
+                - Group
+        system:
+          title: System
+          type: string
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind:
+                - System
+
+    - title: Provide information about the EKS cluster
+      required:
+        - aws_region
+        - cluster_version
+        - vpc_cidr
+        - azs
+        - public_subnets
+        - private_subnets
+        - node_group_max_size
+        - node_group_min_size
+        - node_group_desired_size
+        - instance_type
+        - iam_principal_type
+        - iam_principal_name
+      properties:
+        aws_region:
+          title: AWS Region
+          type: string
+          default: "ap-northeast-1"
+        cluster_version:
+          title: EKS Cluster Version
+          type: string
+          enum:
+            - 1.28
+            - 1.29
+          enumNames:
+            - 1.28
+            - 1.29
+          default: "1.29"
+        vpc_cidr:
+          title: VPC CIDR
+          type: string
+          default: "10.0.0.0/16"
+        public_subnets:
+          title: Public Subnets
+          type: string
+          default:
+            - "10.0.0.0/20"
+            - "10.0.16.0/20"
+            - "10.0.32.0/20"
+        private_subnets:
+          title: Private Subnets
+          type: string
+          default:
+            - "10.0.128.0/20"
+            - "10.0.144.0/20"
+            - "10.0.160.0/20"
+      dependencies:
+        aws_region:
+          oneOf:
+            - properties:
+                aws_region:
+                  enum:
+                    - us-east-1
+                  azs:
+                    title: Availability Zones
+                    type: string
+                    default:
+                      - us-east-1a
+                      - us-east-1b
+                      - us-east-1c
+            - properties:
+                aws_region:
+                  enum:
+                    - ap-northeast-1
+                  azs:
+                    title: Availability Zones
+                    type: string
+                    default:
+                      - ap-northeast-1a
+                      - ap-northeast-1c
+                      - ap-northeast-1d
+    
+    - title: Provide information about the EKS Node Group
+      required:
+        - node_group_max_size
+        - node_group_min_size
+        - node_group_desired_size
+        - node_group_instance_type
+      type: object
+      properties:
+        node_group_max_size:
+          title: Node Group Max Size
+          type: string
+          default: 1
+        node_group_min_size:
+          title: Node Group Min Size
+          type: string
+          default: 3
+        node_group_desired_size:
+          title: Node Group Desired Size
+          type: string
+          default: 3
+        node_group_instance_type:
+          title: Node Group Instance Type
+          type: string
+          default: "m6i.xlarge"
+    
+    - title: Provide information about the EKS Node Group
+      required:
+        - iam_principal_type
+        - iam_principal_name
+      properties:
+        iam_principal_type:
+          title: IAM Principal Type to Grant Cluster Admin
+          type: string
+          default: user
+          enum:
+            - role
+            - user
+        iam_principal_name:
+          title: IAM Principal Name to Grant Cluster Admin
+          type: string
+        
+    - title: Provide information about the git to used
+      required:
+        - git
+        - git_host_url
+        - git_owner_name
+      properties:
+        git:
+          title: Git of Destination
+          type: string
+          description: This action will store the application source code on the selected Git server
+          enum:
+            - github
+            #- gitlab
+          enumNames:
+            - GitHub
+            #- GitLab
+      dependencies:
+        git:
+          oneOf:
+            - properties:
+                git:
+                  enum:
+                    - github
+                git_host_url:
+                  title: Git Host URL
+                  type: string
+                  default: github.com
+                  description: Specify the GitHub or GitLab host URL(e.g., github.com)
+                git_owner_name:
+                  title: GitHub Organization Name or User Name
+                  type: string
+                  description: Specify the GitHub Organization or User to register the repository
+                  default: backsatge-skitamura
+  steps:
+    - id: app-template
+      name: Generating the Application Source Code Component
+      action: fetch:template
+      input:
+        url: ./terraform-skeleton
+        copyWithoutTemplating:
+          - .github/workflows/
+        values:
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          cluster_name: ${{ parameters.cluster_name }}
+          cluster_version: ${{ parameters.owner }}
+          aws_region: ${{ parameters.app_name }}
+          vpc_cidr: ${{ parameters.vpc_cidr }}
+          azs: ${{ parameters.azs }}
+          public_subnets: ${{ parameters.public_subnets }}
+          private_subnets: ${{ parameters.private_subnets }}
+          node_group_max_size: ${{ parameters.node_group_max_size }}
+          node_group_min_size: ${{ parameters.node_group_min_size }}
+          node_group_desired_size: ${{ parameters.node_group_desired_size }}
+          node_group_instance_type: ${{ parameters.node_group_instance_type }}
+          iam_principal_type: ${{ parameters.iam_principal_type }}
+          iam_principal_name: ${{ parameters.iam_principal_name }}
+          git: ${{ parameters.git }}
+          git_host_url: ${{ parameters.git_host_url }}
+          git_owner_name: ${{ parameters.git_owner_name }}
+        targetPath: ./tenant-terraform
+  #  - id: publish-app-to-github
+  #    if: ${{ parameters.git == "github" }}
+  #    name: Publish App Repository to GitHub
+  #    action: publish:github
+  #    input:
+  #      repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}-app
+  #      repoVisibility: public
+  #      sourcePath: ./tenant-app
+  #      defaultBranch: develop
+  #      protectDefaultBranch: false
+
+  #  - id: manifest-template
+  #    name: Generating the K8s Manifest Component
+  #    action: fetch:template
+  #    input:
+  #      url: ./manifest-skeleton
+  #      copyWithoutTemplating:
+  #        - .github/workflows/
+  #      values:
+  #        git: ${{ parameters.git }}
+  #        git_host_url: ${{ parameters.git_host_url }}
+  #        git_owner_name: ${{ parameters.git_owner_name }}
+  #        app_name: ${{ parameters.app_name }}
+  #        owner: ${{ parameters.owner }}
+  #        system: ${{ parameters.system }}
+  #        description: ${{ parameters.description }}
+  #      targetPath: ./tenant-manifest
+
+  #  - id: publish-manifest-to-github
+  #    if: ${{ parameters.git == "github" }}
+  #    name: Publish Manifest Repository to GitHub
+  #    action: publish:github
+  #    input:
+  #      repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}-manifest
+  #      repoVisibility: public
+  #      sourcePath: ./tenant-manifest
+  #      defaultBranch: develop
+  #      protectDefaultBranch: false
+
+  #  - id: register-to-github
+  #    if: ${{ parameters.git == "github" }}
+  #    name: Registering the Catalog Info Component to GitHub
+  #    action: catalog:register
+  #    input:
+  #      repoContentsUrl: ${{ steps['publish-app-to-github'].output.repoContentsUrl }}
+  #      catalogInfoPath: "/catalog-info.yaml"
+
+  #  - id: create-argocd-resources
+  #    name: Create ArgoCD Resources
+  #    action: argocd:create-resources
+  #    input:
+  #      appName: ${{ parameters.app_name }}-bootstrap
+  #      argoInstance: main
+  #      namespace: openshift-gitops
+  #      repoUrl: https://${{ parameters.git_host_url }}/${{ parameters.git_owner_name }}/${{ parameters.app_name }}-manifest.git
+  #      path: 'argocd/'
+
+  #  - id: create-sonarqube-project
+  #    name: Create Sonarqube Project
+  #    action: sonarqube:create-project
+  #    input:
+  #      baseUrl: http://sonarqube-sonarqube.sonarqube.svc:9000
+  #      name: ${{ parameters.app_name }}
+  #      key: ${{ parameters.app_name }}
+  #      branch: main
+  #      username: ${{ parameters.sonarqube_username }}
+  #      password: ${{ parameters.sonarqube_password }}
+
+  #output:
+  #  links:
+  #    - title: Open the Source Code Repository
+  #      if: ${{ parameters.git == "github" }}
+  #      url: ${{ steps['publish-app-to-github'].output.remoteUrl }}
+  #    - title: Open the Catalog Info Component
+  #      if: ${{ parameters.git == "github" }}
+  #      icon: catalog
+  #      entityRef: ${{ steps['register-to-github'].output.entityRef }}
