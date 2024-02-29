@@ -61,6 +61,9 @@ spec:
           enum: 
             - ap-northeaast-1
             - us-east-1
+          enumNames:
+            - ap-northeaast-1
+            - us-east-1
         cluster_version:
           title: EKS Cluster Version
           type: string
