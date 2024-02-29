@@ -14,7 +14,7 @@ spec:
   parameters:
     - title: Provide information about the new component
       required:
-        - cluster_name
+        #- cluster_name
         - owner
         - system
       properties:
