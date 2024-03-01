@@ -63,7 +63,7 @@ spec:
           type: string
           default: "10.0.0.0/16"
         public_subnets:
-          title: Public Subnets
+          #title: Public Subnets
           type: object
           properties:
             public_subnet_1:
@@ -78,8 +78,8 @@ spec:
               title: "Public Subnet 3"
               type: string
               default: "10.0.32.0/20"
-        privete_subnets:
-          title: Private Subnets
+        private_subnets:
+          #title: Private Subnets
           type: object
           properties:
             private_subnet_1:
@@ -108,6 +108,7 @@ spec:
           oneOf:
             - properties:
                 aws_region:
+                  title: AWS Region
                   enum:
                     - ap-northeast-1
                 azs:
@@ -126,6 +127,7 @@ spec:
                       default: "ap-northeast-1d"
             - properties:
                 aws_region:
+                  title: AWS Region
                   enum:
                     - us-east-1
                 azs:
