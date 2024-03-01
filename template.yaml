@@ -117,13 +117,22 @@ spec:
                   ui:widget: hidden
                   properties:
                     az_1:
+                      title: "Availability Zone 1"
                       type: string
+                      enum:
+                        - ap-northeast-1a
                       default: "ap-northeast-1a"
                     az_2:
+                      title: "Availability Zone 2"
                       type: string
+                      enum:
+                        - ap-northeast-1c
                       default: "ap-northeast-1c"
                     az_3:
+                      title: "Availability Zone 3"
                       type: string
+                      enum:
+                        - ap-northeast-1d
                       default: "ap-northeast-1d"
             - properties:
                 aws_region:
@@ -136,13 +145,22 @@ spec:
                   ui:widget: hidden
                   properties:
                     az_1:
+                      title: "Availability Zone 1"
                       type: string
+                      enum:
+                        - us-east-1a
                       default: "us-east-1a"
                     az_2:
+                      title: "Availability Zone 2"
                       type: string
+                      enum:
+                        - us-east-1b
                       default: "us-east-1b"
                     az_3:
+                      title: "Availability Zone 3"
                       type: string
+                      enum:
+                        - us-east-1c
                       default: "us-east-1c"
     
     - title: Provide information about the EKS Node Group
