@@ -87,27 +87,20 @@ spec:
                 default: "10.0.32.0/20"
         privete_subnets:
           title: Private Subnets
-          type: array
-          minItems: 3
-          ui:options:
-            addable: false
-            orderable: false
-            removable: false
-          items:
-            type: object
-            properties:
-              private_subnet_1:
-                title: "Private Subnet 1"
-                type: string
-                default: "10.0.128.0/20"
-              private_subnet_2:
-                title: "Private Subnet 2"
-                type: string
-                default: "10.0.144.0/20"
-              private_subnet_3:
-                title: "Private Subnet 3"
-                type: string
-                default: "10.0.160.0/20"
+          type: object
+          properties:
+            private_subnet_1:
+              title: "Private Subnet 1"
+              type: string
+              default: "10.0.128.0/20"
+            private_subnet_2:
+              title: "Private Subnet 2"
+              type: string
+              default: "10.0.144.0/20"
+            private_subnet_3:
+              title: "Private Subnet 3"
+              type: string
+              default: "10.0.160.0/20"
         aws_region:
           title: AWS Region
           type: string
