@@ -146,10 +146,15 @@ spec:
                   properties:
                     az_1:
                       title: "Availability Zone 1"
-                      type: string
-                      enum:
-                        - us-east-1a
-                      default: "us-east-1a"
+                      #type: string
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - us-east-1a
+                      #default: "us-east-1a"
+                      uniqueItems: true
+                      ui:widget: checkboxes
                     az_2:
                       title: "Availability Zone 2"
                       type: string
