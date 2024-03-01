@@ -242,8 +242,8 @@ iam_principal_type                  title: Git Host URL
                   description: Specify the GitHub Organization or User to register the repository
                   default: backsatge-skitamura
   steps:
-    - id: app-template
-      name: Generating the Application Source Code Component
+    - id: terraform-template
+      name: Generating the Terraform Code Component
       action: fetch:template
       input:
         url: ./terraform-skeleton
@@ -275,16 +275,17 @@ iam_principal_type                  title: Git Host URL
           git_host_url: ${{ parameters.git_host_url }}
           git_owner_name: ${{ parameters.git_owner_name }}
         targetPath: ./tenant-terraform
-  #  - id: publish-app-to-github
-  #    if: ${{ parameters.git == "github" }}
-  #    name: Publish App Repository to GitHub
-  #    action: publish:github
-  #    input:
-  #      repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.app_name }}-app
-  #      repoVisibility: public
-  #      sourcePath: ./tenant-app
-  #      defaultBranch: develop
-  #      protectDefaultBranch: false
+
+    - id: publish-to-github
+      if: ${{ parameters.git == "github" }}
+      name: Publish Terraform Repository to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.cluster_name }}-iac
+        repoVisibility: public
+        sourcePath: ./tenant-terraform
+        defaultBranch: develop
+        protectDefaultBranch: false
 
   #  - id: manifest-template
   #    name: Generating the K8s Manifest Component
