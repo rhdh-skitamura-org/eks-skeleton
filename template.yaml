@@ -65,7 +65,7 @@ spec:
         public_subnets:
           title: Public Subnets
           type: array
-          minItems: 0
+          minItems: 3
           ui:options:
             addable: false
             orderable: false
@@ -88,7 +88,7 @@ spec:
         privete_subnets:
           title: Private Subnets
           type: array
-          minItems: 0
+          minItems: 3
           ui:options:
             addable: false
             orderable: false
