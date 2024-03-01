@@ -114,7 +114,7 @@ spec:
                 azs:
                   title: Availability Zones
                   type: object
-                  ui:widget: hidden
+                  #ui:widget: hidden
                   properties:
                     az_1:
                       title: "Availability Zone 1"
@@ -142,7 +142,7 @@ spec:
                 azs:
                   title: Availability Zones
                   type: object
-                  ui:widget: hidden
+                  #ui:widget: hidden
                   properties:
                     az_1:
                       title: "Availability Zone 1"
