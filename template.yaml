@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: eks-template-10
+  name: eks-template-11
   title: Create a EKS Cluster
   description: Provides an EKS Cluster and terraform code to build and deploy one. 
   tags:
@@ -104,70 +104,47 @@ spec:
               title: "Private Subnet 3"
               type: string
               default: "10.0.160.0/20"
-      #dependencies:
-      #  aws_region:
-      #    oneOf:
-      #      - properties:
-      #          aws_region:
-      #            title: AWS Region
-      #            enum:
-      #              - ap-northeast-1
-      #          azs:
-      #            title: Availability Zones
-      #            type: object
-      #            #ui:widget: hidden
-      #            properties:
-      #              az_1:
-      #                title: "Availability Zone 1"
-      #                type: string
-      #                enum:
-      #                  - ap-northeast-1a
-      #                default: "ap-northeast-1a"
-      #              az_2:
-      #                title: "Availability Zone 2"
-      #                type: string
-      #                enum:
-      #                  - ap-northeast-1c
-      #                default: "ap-northeast-1c"
-      #              az_3:
-      #                title: "Availability Zone 3"
-      #                type: string
-      #                enum:
-      #                  - ap-northeast-1d
-      #                default: "ap-northeast-1d"
-      #      - properties:
-      #          aws_region:
-      #            title: AWS Region
-      #            enum:
-      #              - us-east-1
-      #          azs:
-      #            title: Availability Zones
-      #            type: object
-      #            #ui:widget: hidden
-      #            properties:
-      #              az_1:
-      #                title: "Availability Zone 1"
-      #                #type: string
-      #                type: array
-      #                items:
-      #                  type: string
-      #                  enum:
-      #                    - us-east-1a
-      #                #default: "us-east-1a"
-      #                uniqueItems: true
-      #                ui:widget: checkboxes
-      #              az_2:
-      #                title: "Availability Zone 2"
-      #                type: string
-      #                enum:
-      #                  - us-east-1b
-      #                default: "us-east-1b"
-      #              az_3:
-      #                title: "Availability Zone 3"
-      #                type: string
-      #                enum:
-      #                  - us-east-1c
-      #                default: "us-east-1c"
+      dependencies:
+        aws_region:
+          oneOf:
+            - properties:
+                aws_region:
+                  title: AWS Region
+                  enum:
+                    - ap-northeast-1
+                azs:
+                  title: Availability Zones
+                  type: object
+                  #ui:widget: hidden
+                  properties:
+                    az_1:
+                      title: "Availability Zone 1"
+                      const: ap-northeast-1a
+                    az_2:
+                      title: "Availability Zone 2"
+                      const: ap-northeast-1c
+                    az_3:
+                      title: "Availability Zone 3"
+                      const: ap-northeast-1d
+            - properties:
+                aws_region:
+                  title: AWS Region
+                  enum:
+                    - us-east-1
+                azs:
+                  title: Availability Zones
+                  type: object
+                  #ui:widget: hidden
+                  properties:
+                    az_1:
+                      title: "Availability Zone 1"
+                      const: us-east-1a
+                    az_2:
+                      title: "Availability Zone 2"
+                      const: us-east-1b
+                    az_3:
+                      title: "Availability Zone 3"
+                      const: aus-east-1c
     
     - title: Provide information about the EKS Node Group
       required:
