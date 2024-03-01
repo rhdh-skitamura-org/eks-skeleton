@@ -212,6 +212,14 @@ spec:
           git_owner_name: ${{ parameters.git_owner_name }}
         targetPath: ./tenant-terraform
 
+    - id: github-actions-file
+      if: ${{ parameters.git == "github" }}
+      name: Get GitHub Actions Code
+      action: fetch:plain:file
+      input:
+        url: ./terraform-skeleton/.github/workflows/terraform.yml 
+        targetPath: ./tenant-terraform/.github/workflows/
+
     - id: publish-to-github
       if: ${{ parameters.git == "github" }}
       name: Publish Terraform Repository to GitHub
@@ -222,6 +230,10 @@ spec:
         sourcePath: ./tenant-terraform
         defaultBranch: develop
         protectDefaultBranch: false
+        secrets: {
+          "AWS_DEFAULT_REGION": ${{parameters.aws_region }}
+          "AWS_ROLE_ARN": ""
+        } 
 
   #  - id: manifest-template
   #    name: Generating the K8s Manifest Component
