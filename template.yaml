@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: eks-template-3
+  name: eks-template-4
   title: Create a EKS Cluster
   description: Provides an EKS Cluster and terraform code to build and deploy one. 
   tags:
@@ -256,9 +256,9 @@ spec:
           cluster_version: ${{ parameters.owner }}
           aws_region: ${{ parameters.app_name }}
           vpc_cidr: ${{ parameters.vpc_cidr }}
-          az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
-          az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
-          az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
+          #az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
+          #az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
+          #az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
           public_subnet_1: ${{ parameters.public_subnet_1 }}
           public_subnet_2: ${{ parameters.public_subnet_2 }}
           public_subnet_3: ${{ parameters.public_subnet_3 }}
