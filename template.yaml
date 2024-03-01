@@ -64,27 +64,20 @@ spec:
           default: "10.0.0.0/16"
         public_subnets:
           title: Public Subnets
-          type: array
-          minItems: 3
-          ui:options:
-            addable: false
-            orderable: false
-            removable: false
-          items:
-            type: object
-            properties:
-              public_subnet_1:
-                title: "Public Subnet 1"
-                type: string
-                default: "10.0.0.0/20"
-              public_subnet_2:
-                title: "Public Subnet 2"
-                type: string
-                default: "10.0.16.0/20"
-              public_subnet_3:
-                title: "Public Subnet 3"
-                type: string
-                default: "10.0.32.0/20"
+          type: object
+          properties:
+            public_subnet_1:
+              title: "Public Subnet 1"
+              type: string
+              default: "10.0.0.0/20"
+            public_subnet_2:
+              title: "Public Subnet 2"
+              type: string
+              default: "10.0.16.0/20"
+            public_subnet_3:
+              title: "Public Subnet 3"
+              type: string
+              default: "10.0.32.0/20"
         privete_subnets:
           title: Private Subnets
           type: object
