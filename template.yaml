@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: eks-template-5
+  name: eks-template-6
   title: Create a EKS Cluster
   description: Provides an EKS Cluster and terraform code to build and deploy one. 
   tags:
@@ -240,7 +240,7 @@ spec:
                   title: GitHub Organization Name or User Name
                   type: string
                   description: Specify the GitHub Organization or User to register the repository
-                  default: backsatge-skitamura
+                  default: backstage-skitamura
   steps:
     - id: terraform-template
       name: Generating the Terraform Code Component
