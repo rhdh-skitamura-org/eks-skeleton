@@ -45,7 +45,6 @@ spec:
         - aws_region
         - cluster_version
         - vpc_cidr
-        - azs
         - public_subnets
         - private_subnets
       properties:
