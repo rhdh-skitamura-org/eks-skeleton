@@ -232,7 +232,7 @@ spec:
                   enum:
                     - github
                 git_host_url:
-                  title: Git Host URL
+iam_principal_type                  title: Git Host URL
                   type: string
                   default: github.com
                   description: Specify the GitHub or GitLab host URL(e.g., github.com)
@@ -259,8 +259,12 @@ spec:
           az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
           az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
           az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
-          public_subnets: ${{ parameters.public_subnets }}
-          private_subnets: ${{ parameters.private_subnets }}
+          public_subnet_1: ${{ parameters.public_subnet_1 }}
+          public_subnet_2: ${{ parameters.public_subnet_2 }}
+          public_subnet_3: ${{ parameters.public_subnet_3 }}
+          private_subnet_1: ${{ parameters.private_subnet_1 }}
+          private_subnet_2: ${{ parameters.private_subnet_2 }}
+          private_subnet_3: ${{ parameters.private_subnet_3 }}
           node_group_max_size: ${{ parameters.node_group_max_size }}
           node_group_min_size: ${{ parameters.node_group_min_size }}
           node_group_desired_size: ${{ parameters.node_group_desired_size }}
