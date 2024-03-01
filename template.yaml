@@ -243,7 +243,7 @@ spec:
                   title: GitHub Organization Name or User Name
                   type: string
                   description: Specify the GitHub Organization or User to register the repository
-                  default: backstage-skitamura
+                  default: rhdh-skitamura-org
   steps:
     - id: terraform-template
       name: Generating the Terraform Code Component
