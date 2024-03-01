@@ -13,7 +13,6 @@ module "vpc" {
   single_nat_gateway     = false
   one_nat_gateway_per_az = true
 
-  # これがないと後ほど作成するALBが自動で作成されません。
   public_subnet_tags = {
     "kubernetes.io/role/elb" = 1
   }
