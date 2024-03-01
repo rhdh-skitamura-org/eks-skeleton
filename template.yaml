@@ -51,6 +51,7 @@ spec:
         aws_region:
           title: AWS Region
           type: string
+          default: "ap-northeast-1"
           enum: 
             - ap-northeast-1
             - us-east-1
@@ -60,6 +61,7 @@ spec:
         cluster_version:
           title: EKS Cluster Version
           type: string
+          default: "1.29"
           enum:
             - "1.28"
             - "1.29"
@@ -207,6 +209,7 @@ spec:
         iam_principal_name:
           title: IAM Principal Name to Grant Cluster Admin
           type: string
+          default: "eks-test-user"
         
     - title: Provide information about the git to used
       required:
@@ -276,16 +279,16 @@ spec:
           git_owner_name: ${{ parameters.git_owner_name }}
         targetPath: ./tenant-terraform
 
-  #  - id: publish-to-github
-  #    if: ${{ parameters.git == "github" }}
-  #    name: Publish Terraform Repository to GitHub
-  #    action: publish:github
-  #    input:
-  #      repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.cluster_name }}-iac
-  #      repoVisibility: public
-  #      sourcePath: ./tenant-terraform
-  #      defaultBranch: develop
-  #      protectDefaultBranch: false
+    - id: publish-to-github
+      if: ${{ parameters.git == "github" }}
+      name: Publish Terraform Repository to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.cluster_name }}-iac
+        repoVisibility: public
+        sourcePath: ./tenant-terraform
+        defaultBranch: develop
+        protectDefaultBranch: false
 
   #  - id: manifest-template
   #    name: Generating the K8s Manifest Component
