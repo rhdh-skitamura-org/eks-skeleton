@@ -256,18 +256,18 @@ spec:
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           cluster_name: ${{ parameters.cluster_name }}
-          cluster_version: ${{ parameters.owner }}
-          aws_region: ${{ parameters.app_name }}
+          cluster_version: ${{ parameters.cluster_version }}
+          aws_region: ${{ parameters.aws_region }}
           vpc_cidr: ${{ parameters.vpc_cidr }}
-          #az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
-          #az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
-          #az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
-          public_subnet_1: ${{ parameters.public_subnet_1 }}
-          public_subnet_2: ${{ parameters.public_subnet_2 }}
-          public_subnet_3: ${{ parameters.public_subnet_3 }}
-          private_subnet_1: ${{ parameters.private_subnet_1 }}
-          private_subnet_2: ${{ parameters.private_subnet_2 }}
-          private_subnet_3: ${{ parameters.private_subnet_3 }}
+          az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
+          az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
+          az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
+          public_subnet_1: ${{ parameters.public_subnets.public_subnet_1 }}
+          public_subnet_2: ${{ parameters.public_subnets.public_subnet_2 }}
+          public_subnet_3: ${{ parameters.public_subnets.public_subnet_3 }}
+          private_subnet_1: ${{ parameters.private_subnets.private_subnet_1 }}
+          private_subnet_2: ${{ parameters.private_subnets.private_subnet_2 }}
+          private_subnet_3: ${{ parameters.private_subnets.private_subnet_3 }}
           node_group_max_size: ${{ parameters.node_group_max_size }}
           node_group_min_size: ${{ parameters.node_group_min_size }}
           node_group_desired_size: ${{ parameters.node_group_desired_size }}
