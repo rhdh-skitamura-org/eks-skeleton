@@ -11,12 +11,6 @@ locals {
     name = "${{ values.cluster_name }}-vpc"
     cidr = "${{ values.vpc_cidr }}"
 
-    azs = [
-      "${{ values.az_1 }}",
-      "${{ values.az_2 }}",
-      "${{ values.az_3 }}"
-    ]
-
     public_subnets = [
       "${{ values.public_subnet_1 }}",
       "${{ values.public_subnet_2 }}",

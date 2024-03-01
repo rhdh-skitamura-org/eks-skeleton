@@ -104,47 +104,6 @@ spec:
               title: "Private Subnet 3"
               type: string
               default: "10.0.160.0/20"
-      dependencies:
-        aws_region:
-          oneOf:
-            - properties:
-                aws_region:
-                  title: AWS Region
-                  enum:
-                    - ap-northeast-1
-                azs:
-                  title: Availability Zones
-                  type: object
-                  #ui:widget: hidden
-                  properties:
-                    az_1:
-                      title: "Availability Zone 1"
-                      const: ap-northeast-1a
-                    az_2:
-                      title: "Availability Zone 2"
-                      const: ap-northeast-1c
-                    az_3:
-                      title: "Availability Zone 3"
-                      const: ap-northeast-1d
-            - properties:
-                aws_region:
-                  title: AWS Region
-                  enum:
-                    - us-east-1
-                azs:
-                  title: Availability Zones
-                  type: object
-                  #ui:widget: hidden
-                  properties:
-                    az_1:
-                      title: "Availability Zone 1"
-                      const: us-east-1a
-                    az_2:
-                      title: "Availability Zone 2"
-                      const: us-east-1b
-                    az_3:
-                      title: "Availability Zone 3"
-                      const: aus-east-1c
     
     - title: Provide information about the EKS Node Group
       required:
@@ -236,9 +195,6 @@ spec:
           cluster_version: ${{ parameters.cluster_version }}
           aws_region: ${{ parameters.aws_region }}
           vpc_cidr: ${{ parameters.vpc_cidr }}
-          az_1: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1a{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1a{% endif %}}
-          az_2: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1b{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1c{% endif %}} 
-          az_3: ${{% if $.parameters.aws_region == 'us-east-1' %}us-east-1c{% elif $.parameters.aws_region == 'ap-northeast-1' %}ap-northeast-1d{% endif %}} 
           public_subnet_1: ${{ parameters.public_subnets.public_subnet_1 }}
           public_subnet_2: ${{ parameters.public_subnets.public_subnet_2 }}
           public_subnet_3: ${{ parameters.public_subnets.public_subnet_3 }}

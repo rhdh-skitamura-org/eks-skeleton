@@ -1,3 +1,7 @@
+data "aws_caller_identity" "current" {}
+
+data "aws_availability_zones" "available" {}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -5,7 +9,12 @@ module "vpc" {
   cidr                 = local.vpc.cidr
   enable_dns_hostnames = true
 
-  azs             = local.vpc.azs
+  azs = [
+    data.aws_availability_zones.available.names[0],
+    data.aws_availability_zones.available.names[1],
+    data.aws_availability_zones.available.names[2],
+  ]
+
   public_subnets  = local.vpc.public_subnets
   private_subnets = local.vpc.private_subnets
 
