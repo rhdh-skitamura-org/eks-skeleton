@@ -55,15 +55,6 @@ spec:
         - iam_principal_type
         - iam_principal_name
       properties:
-        aws_region:
-          title: AWS Region
-          type: string
-          enum: 
-            - ap-northeaast-1
-            - us-east-1
-          enumNames:
-            - ap-northeaast-1
-            - us-east-1
         cluster_version:
           title: EKS Cluster Version
           type: string
@@ -73,7 +64,6 @@ spec:
           enumNames:
             - 1.28
             - 1.29
-          default: "1.29"
         vpc_cidr:
           title: VPC CIDR
           type: string
@@ -92,6 +82,15 @@ spec:
             - "10.0.128.0/20"
             - "10.0.144.0/20"
             - "10.0.160.0/20"
+        aws_region:
+          title: AWS Region
+          type: string
+          enum: 
+            - ap-northeaast-1
+            - us-east-1
+          enumNames:
+            - ap-northeaast-1
+            - us-east-1
       dependencies:
         aws_region:
           oneOf:
