@@ -232,7 +232,7 @@ spec:
                   enum:
                     - github
                 git_host_url:
-iam_principal_type                  title: Git Host URL
+                  title: Git Host URL
                   type: string
                   default: github.com
                   description: Specify the GitHub or GitLab host URL(e.g., github.com)
