@@ -80,25 +80,14 @@ spec:
           title: AWS Region
           type: string
           enum: 
-            - ap-northeaast-1
+            - ap-northeast-1
             - us-east-1
           enumNames:
-            - ap-northeaast-1
+            - ap-northeast-1
             - us-east-1
       dependencies:
         aws_region:
           oneOf:
-            - properties:
-                aws_region:
-                  enum:
-                    - us-east-1
-                  azs:
-                    title: Availability Zones
-                    type: array
-                    default:
-                      - us-east-1a
-                      - us-east-1b
-                      - us-east-1c
             - properties:
                 aws_region:
                   enum:
@@ -110,6 +99,17 @@ spec:
                       - ap-northeast-1a
                       - ap-northeast-1c
                       - ap-northeast-1d
+            - properties:
+                aws_region:
+                  enum:
+                    - us-east-1
+                  azs:
+                    title: Availability Zones
+                    type: array
+                    default:
+                      - us-east-1a
+                      - us-east-1b
+                      - us-east-1c
     
     - title: Provide information about the EKS Node Group
       required:
