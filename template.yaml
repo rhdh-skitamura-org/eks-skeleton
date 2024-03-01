@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: eks-template-6
+  name: eks-template-7
   title: Create a EKS Cluster
   description: Provides an EKS Cluster and terraform code to build and deploy one. 
   tags:

@@ -81,20 +81,3 @@ module "eks" {
     Terraform   = "true"
   }
 }
-
-#resource aws_eks_access_entry entry {
-#  cluster_name      = module.eks.cluster_name
-#  principal_arn     = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:${local.eks_access_entry.principal_type}/${local.eks_access_entry.principal_name}"
-#  type              = "STANDARD"
-#}
-#
-#resource aws_eks_access_policy_association access_policy_association {
-#  cluster_name  = module.eks.cluster_name
-#  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-#                   arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy
-#  principal_arn = aws_eks_access_entry.entry.access_entry_arn
-#
-#  access_scope {
-#    type       = "cluster"
-#  }
-#}
