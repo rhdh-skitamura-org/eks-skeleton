@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: eks-template-2
+  name: eks-template-3
   title: Create a EKS Cluster
   description: Provides an EKS Cluster and terraform code to build and deploy one. 
   tags:
@@ -276,16 +276,16 @@ spec:
           git_owner_name: ${{ parameters.git_owner_name }}
         targetPath: ./tenant-terraform
 
-    - id: publish-to-github
-      if: ${{ parameters.git == "github" }}
-      name: Publish Terraform Repository to GitHub
-      action: publish:github
-      input:
-        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.cluster_name }}-iac
-        repoVisibility: public
-        sourcePath: ./tenant-terraform
-        defaultBranch: develop
-        protectDefaultBranch: false
+  #  - id: publish-to-github
+  #    if: ${{ parameters.git == "github" }}
+  #    name: Publish Terraform Repository to GitHub
+  #    action: publish:github
+  #    input:
+  #      repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.cluster_name }}-iac
+  #      repoVisibility: public
+  #      sourcePath: ./tenant-terraform
+  #      defaultBranch: develop
+  #      protectDefaultBranch: false
 
   #  - id: manifest-template
   #    name: Generating the K8s Manifest Component
