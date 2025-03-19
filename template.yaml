@@ -230,10 +230,10 @@ spec:
         sourcePath: ./tenant-terraform
         defaultBranch: develop
         protectDefaultBranch: false
-        secrets: {
-          "AWS_DEFAULT_REGION": ${{ parameters.aws_region }}
-          "AWS_ROLE_ARN": ""
-        } 
+        #secrets: {
+        #  "AWS_DEFAULT_REGION": ${{ parameters.aws_region }}
+        #  "AWS_ROLE_ARN": ""
+        #} 
 
   #  - id: manifest-template
   #    name: Generating the K8s Manifest Component
