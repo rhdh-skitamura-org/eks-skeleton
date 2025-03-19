@@ -231,7 +231,7 @@ spec:
         defaultBranch: develop
         protectDefaultBranch: false
         secrets: {
-          "AWS_DEFAULT_REGION": ${{parameters.aws_region }}
+          "AWS_DEFAULT_REGION": ${{ parameters.aws_region }}
           "AWS_ROLE_ARN": ""
         } 
 
